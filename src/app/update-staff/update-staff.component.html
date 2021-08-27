@@ -1,0 +1,90 @@
+<p>update-staff works!</p>
+{{updateStaffForm.value|json}}
+<form [formGroup]="updateStaffForm" (ngSubmit)="onSubmit()">
+    <div id="content">
+        <div>
+             <mat-form-field appearance="outline">
+            <mat-label >Member Code</mat-label>
+            <input matInput type="number" formControlName="staffCode">
+        </mat-form-field>
+        </div>
+        
+        <div>
+             <mat-form-field appearance="outline">
+            
+            <mat-label >Name</mat-label>
+            <input matInput type="text" formControlName="empName">
+        </mat-form-field>
+    
+        </div>
+       
+        <div>
+             <mat-form-field appearance="outline">
+    
+            <mat-label >Salary</mat-label>
+            <input matInput type="number" formControlName="empSalary">
+        </mat-form-field>
+    
+        </div>
+        <div>
+             <mat-form-field appearance="outline">
+    
+            <mat-label >Age</mat-label>
+            <input matInput type="number" formControlName="empAge">
+        </mat-form-field>
+    
+        </div>
+        <div>
+             <mat-form-field appearance="outline">
+    
+            <mat-label >Occupation</mat-label>
+            <input matInput type="text" formControlName="empOccupation">
+        </mat-form-field>
+    
+        </div>
+        <div>
+             <mat-form-field appearance="outline">
+    
+            <mat-label >Email</mat-label>
+            <input matInput type="email" formControlName="empEmail">
+        </mat-form-field>
+    
+        </div>
+        <div formGroupName="empAddress" id="addresscontent" > 
+               <div class="form-group">
+                <mat-form-field appearance="outline">
+       
+                 <mat-label >Street</mat-label>
+                 <input matInput type="text" formControlName="street" class="form-control" >
+           </mat-form-field>
+       
+               </div>
+               <div class="form-group">
+                <mat-form-field appearance="outline">
+       
+                 <mat-label >Zip code</mat-label>
+                 <input matInput type="number" formControlName="zipCode" class="form-control" >
+           </mat-form-field>
+       
+               </div>
+               <div class="form-group">
+                    <mat-form-field appearance="outline">
+           
+                     <mat-label >City</mat-label>
+                     <input matInput type="text" formControlName="city" class="form-control" >
+               </mat-form-field>
+           
+                   </div>
+                   <div class="form-group">
+                        <mat-form-field appearance="outline">
+               
+                         <mat-label >Country</mat-label>
+                         <input matInput type="text" formControlName="country" class="form-control" >
+                   </mat-form-field>
+               
+                       </div>
+             </div>  
+    </div>
+    <button mat-raised-button type="submit">Update</button>
+    <button mat-raised-button (click)="onCancel()" type="button">Cancel</button>
+    </form>

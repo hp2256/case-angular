@@ -1,0 +1,19 @@
+#content{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+#content div{
+    padding: 15px;
+}
+#addresscontent{
+    
+    display: flex;
+ }
+ /* 
+ #addresscontent div{
+    display: inline;
+}
+#addresscontent .form-group{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+} */

@@ -1,0 +1,85 @@
+<style>
+    table {
+  width: 100%;
+}
+</style>
+<mat-toolbar>
+    <a (click)="addStaff()" mat-raised-button routerLink="/add" routerLinkActive="active">Add</a>
+    <!-- <a mat-raised-button >Add</a> -->
+</mat-toolbar>
+<div>
+    <div class="all-staff">
+        <!-- {{staff|json}} -->
+        <br>
+        <mat-form-field appearance="standard">
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Name" #input>
+        </mat-form-field>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> Id </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="staffCode">
+              <th mat-header-cell *matHeaderCellDef> Staff Code </th>
+              <td mat-cell *matCellDef="let element"> {{element.staffCode}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="empName">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.empName}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="empAddress">
+              <th mat-header-cell *matHeaderCellDef> Address </th>
+              <td  mat-cell *matCellDef="let e"> 
+                <br>
+                        <span>Street: </span>  {{e.empAddress.street}}
+                   <br>
+                        {{e.empAddress.city}}
+                  <br>
+                        {{e.empAddress.country}}
+              <br>
+                        {{e.empAddress.zipCode}}
+                 
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="empSalary">
+                <th mat-header-cell *matHeaderCellDef> Salary </th>
+                <td mat-cell *matCellDef="let element"> {{element.empSalary}} </td>
+              </ng-container>
+              <ng-container matColumnDef="empAge">
+                <th mat-header-cell *matHeaderCellDef> Age </th>
+                <td mat-cell *matCellDef="let element"> {{element.empAge}} </td>
+              </ng-container>
+              <ng-container matColumnDef="empOccupation">
+                <th mat-header-cell *matHeaderCellDef> Occupation </th>
+                <td mat-cell *matCellDef="let element"> {{element.empOccupation}} </td>
+              </ng-container>
+              <ng-container matColumnDef="empEmail">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element"> {{element.empEmail}} </td>
+              </ng-container>
+        
+              <ng-container matColumnDef="updateStaff">
+                <th mat-header-cell *matHeaderCellDef> Update </th>
+                <td mat-cell *matCellDef="let element"> 
+                  <button mat-raised-button color="primary" (click)="updateStaff(element)">Update</button>
+                 </td>
+              </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+<!-- Row shown when there is no matching data. -->
+<tr class="mat-row" *matNoDataRow>
+  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+</tr>
+          </table>
+          
+          
+    </div>
+</div>

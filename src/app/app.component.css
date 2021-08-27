@@ -1,0 +1,10 @@
+.navbar{
+    justify-content: space-between;
+
+}
+.navbar a{
+    margin: 10px;
+}
+.active {
+    color: #039be5;
+  }
