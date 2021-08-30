@@ -5,6 +5,7 @@ import { Address } from '../address';
 import { Staff } from '../staff';
 import { StaffList } from '../staff-list';
 import { StaffserviceService } from '../staffservice.service';
+import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-staff-list',
@@ -16,14 +17,25 @@ export class StaffListComponent implements OnInit {
   //public staff:StaffList;
   public errorMessage:string="";
   dataSource = new MatTableDataSource();
+  isLoggedIn=false;
+  allowed=false;
+  private roles: string[] = [];
 
   constructor(
     private _staffService:StaffserviceService,
     private router:Router, 
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private token:TokenStorageService
      ) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.token.getToken();
+if(this.isLoggedIn){
+  const user = this.token.getUser();
+  this.roles = user.roles;
+
+  if(this.roles.includes('ROLE_OWNER')||this.roles.includes('ROLE_MANAGER')){
+    this.allowed=true;
     this._staffService.getStaff()
     .subscribe(
       data=>{
@@ -31,6 +43,10 @@ export class StaffListComponent implements OnInit {
       },
       error=>this.errorMessage=error
     )
+  }
+}
+
+  
 
     
     console.log("STAFF");

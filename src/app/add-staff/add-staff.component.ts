@@ -21,21 +21,22 @@ export class AddStaffComponent implements OnInit {
 
   addStaffForm!: FormGroup;
   addStaff!:Staff;
+
   ngOnInit(): void {
     this.addStaffForm= this.fb.group(
       {
         //id:[],
-        empName:['',Validators.required],
-        staffCode:[Validators.required],
-        empSalary:[Validators.required],
-        empAge:[Validators.required,Validators.min(18)],
-        empOccupation:['',Validators.required],
-        empEmail:['',Validators.required,Validators.email],
+        empName:['',[Validators.required]],
+        staffCode:['',[Validators.required]],
+        empSalary:['',[Validators.required]],
+        empAge:['',[Validators.required,Validators.min(18)]],
+        empOccupation:['',[Validators.required]],
+        empEmail:['',[Validators.required,Validators.email]],
         empAddress: this.fb.group({
-          street: ['',Validators.required],
-          zipCode: [Validators.required],
-          city: ['',Validators.required],
-          country:['',Validators.required]
+          street: ['',[Validators.required]],
+          zipCode: ['',[Validators.required]],
+          city: ['',[Validators.required]],
+          country:['',[Validators.required]]
         }),
       }
     )
@@ -43,6 +44,28 @@ export class AddStaffComponent implements OnInit {
   get empName(){
     return this.addStaffForm.get('empName')!;
   }
+  get staffCode(){
+    return this.addStaffForm.get('staffCode')!;
+  }
+  get empSalary(){
+    return this.addStaffForm.get('empSalary')!;
+  }
+  get empAge(){
+    return this.addStaffForm.get('empAge')!;
+  }
+  get empOccupation(){
+    return this.addStaffForm.get('empOccupation')!;
+  }
+  get empEmail(){
+    return this.addStaffForm.get('empEmail')!;
+  }
+  get empAddress(){
+    return this.addStaffForm.get('empAddress')!;
+  }
+  // get empName(){
+  //   return this.addStaffForm.get('empName')!;
+  // }
+  
   onSubmit(){
     console.log(this.addStaffForm.value);
     this.addStaff=this.addStaffForm.value;

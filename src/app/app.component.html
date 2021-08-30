@@ -10,17 +10,25 @@
 <div class="content" role="main">
 
 </div>
+<div>
 <mat-toolbar color="primary" class="navbar">
   <span>HMS</span><br>
-  <div>
+  <div *ngIf="isLoggedIn && showAdminBoard||showManagerBoard">
     <!-- change depending on role  -->
-    
   <a  mat-raised-button routerLink="/staff" routerLinkActive="active">Staff</a>
   <a  mat-raised-button routerLink="/rooms" routerLinkActive="active">Rooms</a>
   <a  mat-raised-button routerLink="/ics" routerLinkActive="active">ICS</a>
-
+</div>
+<div *ngIf="!isLoggedIn">
+  <a  mat-raised-button routerLink="/login" routerLinkActive="active">Log In</a>
+</div>
+<div *ngIf="isLoggedIn">
+  <a  mat-raised-button (click)="logout()">Logout</a>
 </div>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+</div>
 <!-- routed views go here -->

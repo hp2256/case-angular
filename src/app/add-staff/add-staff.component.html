@@ -15,9 +15,8 @@ Add staff
         <mat-label >Name</mat-label>
         <input
         matInput type="text" formControlName="empName">
-        <div *ngIf="empName.invalid">
+        <mat-error *ngIf="empName.invalid">Required!</mat-error>
 
-        </div>
     </mat-form-field>
 
     </div>
