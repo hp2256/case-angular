@@ -1,11 +1,17 @@
 Add staff
 {{addStaffForm.value | json}}
+<div id="main">
+    <div [hidden]="!errorBool">
+        ERROR: {{errorMsg}}
+    </div>
 <form [formGroup]="addStaffForm" (ngSubmit)="onSubmit()">
 <div id="content">
     <div>
          <mat-form-field appearance="outline">
         <mat-label >Member Code</mat-label>
         <input  matInput type="number" formControlName="staffCode">
+        <mat-error *ngIf="staffCode.errors?.required">Required!</mat-error>
+
     </mat-form-field>
     </div>
     
@@ -15,7 +21,7 @@ Add staff
         <mat-label >Name</mat-label>
         <input
         matInput type="text" formControlName="empName">
-        <mat-error *ngIf="empName.invalid">Required!</mat-error>
+        <mat-error *ngIf="empName.errors?.required">Required!</mat-error>
 
     </mat-form-field>
 
@@ -26,6 +32,8 @@ Add staff
 
         <mat-label >Salary</mat-label>
         <input matInput type="number" formControlName="empSalary">
+        <mat-error *ngIf="empSalary.errors?.required">Required!</mat-error>
+
     </mat-form-field>
 
     </div>
@@ -34,6 +42,9 @@ Add staff
 
         <mat-label >Age</mat-label>
         <input matInput type="number" formControlName="empAge">
+        <mat-error *ngIf="empAge.errors?.minlength">Minimum age is 18!</mat-error>
+        <mat-error *ngIf="empAge.errors?.required">Required!</mat-error>
+
     </mat-form-field>
 
     </div>
@@ -42,6 +53,8 @@ Add staff
 
         <mat-label >Occupation</mat-label>
         <input matInput type="text" formControlName="empOccupation">
+        <mat-error *ngIf="empOccupation.errors?.required">Required!</mat-error>
+
     </mat-form-field>
 
     </div>
@@ -50,6 +63,9 @@ Add staff
 
         <mat-label >Email</mat-label>
         <input matInput type="email" formControlName="empEmail">
+        <mat-error *ngIf="empOccupation.errors?.required">Required!</mat-error>
+        <mat-error *ngIf="empOccupation.errors?.email">Not a valid email!</mat-error>
+
     </mat-form-field>
 
     </div>
@@ -59,6 +75,8 @@ Add staff
    
              <mat-label >Street</mat-label>
              <input matInput type="text" formControlName="street"  >
+        <mat-error *ngIf="street.errors?.required">Required!</mat-error>
+
        </mat-form-field>
    
            </div>
@@ -67,6 +85,8 @@ Add staff
    
              <mat-label >Zip code</mat-label>
              <input matInput type="number" formControlName="zipCode"  >
+        <mat-error *ngIf="zipcode.errors?.required">Required!</mat-error>
+
        </mat-form-field>
    
            </div>
@@ -75,6 +95,8 @@ Add staff
        
                  <mat-label >City</mat-label>
                  <input matInput type="text" formControlName="city"  >
+        <mat-error *ngIf="city.errors?.required">Required!</mat-error>
+
            </mat-form-field>
        
                </div>
@@ -83,11 +105,14 @@ Add staff
            
                      <mat-label >Country</mat-label>
                      <input matInput type="text" formControlName="country"  >
+        <mat-error *ngIf="country.errors?.required">Required!</mat-error>
+
                </mat-form-field>
            
                    </div>
          </div>  
 </div>
-<button mat-raised-button [disabled]="!addStaffForm.valid" type="submit">Add</button>
+<button style="margin: 15px;" mat-raised-button [disabled]="!addStaffForm.valid" type="submit">Add</button>
 <button mat-raised-button (click)="onCancel()" type="button">Cancel</button>
 </form>
+</div>

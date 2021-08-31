@@ -1,10 +1,9 @@
-<p>add-room works!</p>
 <div>
     <div [hidden]="!errorBool">
         ERROR: {{errorMsg}}
     </div>
-<form [formGroup]="addRoomForm" (ngSubmit)="onSubmit()">
-    {{addRoomForm.value|json}}
+<form [formGroup]="updateRoomForm" (ngSubmit)="onSubmit()">
+    {{updateRoomForm.value|json}}
 <div id="content">
     <div>
          <mat-form-field appearance="outline">
@@ -58,7 +57,7 @@
     </mat-form-field>
  </div>
 </div>
-<button style="margin: 15px;" mat-raised-button [disabled]="!addRoomForm.valid" type="submit">Add</button>
+<button style="margin: 15px;" mat-raised-button [disabled]="!updateRoomForm.valid" type="submit">Update</button>
 <button mat-raised-button (click)="onCancel()" type="button">Cancel</button>
 </form>
 </div>

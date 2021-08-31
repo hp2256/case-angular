@@ -21,15 +21,16 @@ export class AddStaffComponent implements OnInit {
 
   addStaffForm!: FormGroup;
   addStaff!:Staff;
-
+  errorMsg:string="";
+  errorBool=false;
   ngOnInit(): void {
     this.addStaffForm= this.fb.group(
       {
         //id:[],
-        empName:['',[Validators.required]],
-        staffCode:['',[Validators.required]],
-        empSalary:['',[Validators.required]],
-        empAge:['',[Validators.required,Validators.min(18)]],
+        empName:['',[Validators.required]]!,
+        staffCode:['',[Validators.required]]!,
+        empSalary:['',[Validators.required]]!,
+        empAge:['',[Validators.required,Validators.min(18)]]!,
         empOccupation:['',[Validators.required]],
         empEmail:['',[Validators.required,Validators.email]],
         empAddress: this.fb.group({
@@ -62,6 +63,21 @@ export class AddStaffComponent implements OnInit {
   get empAddress(){
     return this.addStaffForm.get('empAddress')!;
   }
+  get country() {
+    return this.addStaffForm.get("empAddress")!.get('country')!;
+  }
+ 
+  get city() {
+    return this.addStaffForm.get("empAddress")!.get('city')!;
+  }
+ 
+  get street() {
+    return this.addStaffForm.get("empAddress")!.get('street')!;
+  }
+ 
+  get zipcode() {
+    return this.addStaffForm.get("empAddress")!.get('zipCode')!;
+  }
   // get empName(){
   //   return this.addStaffForm.get('empName')!;
   // }
@@ -71,7 +87,10 @@ export class AddStaffComponent implements OnInit {
     this.addStaff=this.addStaffForm.value;
     this._staffService.addStaff(this.addStaff).subscribe(
       response=>console.log(response),
-      error=>console.log(error)      
+      error=>{
+        this.errorBool=true;
+        console.log(error);
+        this.errorMsg=error;}     
     )
     this.router.navigate(['../'],{relativeTo:this.route});
   }
