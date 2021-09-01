@@ -3,12 +3,16 @@ import { CommonModule } from '@angular/common';
 import { SearchRoomsComponent } from './search-rooms/search-rooms.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MakeReservationComponent } from './make-reservation/make-reservation.component';
+import { ReservationBillingComponent } from './reservation-billing/reservation-billing.component';
 
 
 
 @NgModule({
   declarations: [
-    SearchRoomsComponent
+    SearchRoomsComponent,
+    MakeReservationComponent,
+    ReservationBillingComponent
   ],
   imports: [
     CommonModule,

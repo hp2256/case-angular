@@ -38,7 +38,7 @@ export class AddStaffComponent implements OnInit {
           zipCode: ['',[Validators.required]],
           city: ['',[Validators.required]],
           country:['',[Validators.required]]
-        }),
+        })
       }
     )
   }

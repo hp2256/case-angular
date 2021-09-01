@@ -10,8 +10,9 @@ import { Rooms } from './rooms';
 })
 export class RoomsServiceService {
 
-  private _url:string="http://localhost:8083/"
-  constructor(private _httpClient:HttpClient) { }
+ //private _url:string="http://localhost:8100/case-rooms/"
+ private _url:string="http://localhost:8083/" 
+ constructor(private _httpClient:HttpClient) { }
   private headers1 = new HttpHeaders().set('Content-Type', 'application/json');
 
   getRooms():Observable<AllRooms>{

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Rooms } from 'src/app/rooms-mgmt/rooms';
 import { ReservationServicesService } from '../reservation-services.service';
 
@@ -18,7 +19,9 @@ export class SearchRoomsComponent implements OnInit {
 
   constructor(
     private fb:FormBuilder,
-    private reservationService:ReservationServicesService
+    private reservationService:ReservationServicesService,
+    private route:ActivatedRoute,
+    private router:Router
     ) { }
   //allRooms: AllRooms
   errorMessage:string="";
@@ -34,7 +37,6 @@ export class SearchRoomsComponent implements OnInit {
     checkIn!: string;
     checkOut!: string;
   search(){
-
     this.checkIn=formatDate(this.range.get('start')?.value,'yyyy-MM-dd','en');
     this.checkOut=formatDate(this.range.get('end')?.value,'yyyy-MM-dd','en');
     this.reservationService.searchRooms(this.checkIn,this.checkOut)
@@ -59,6 +61,10 @@ export class SearchRoomsComponent implements OnInit {
     this.roomsDataSource.filter = filterValue.trim().toLowerCase();
   }
   reserve(rooms:Rooms){
-
+    console.log(rooms);
+    console.log(this.checkIn);
+    console.log(this.checkOut);
+    this.router.navigate([rooms.id,this.checkIn,this.checkOut],{relativeTo:this.route});
+    //dont need to add price and number of nights
   }
 }

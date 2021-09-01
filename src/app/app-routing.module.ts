@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { MakeReservationComponent } from './reservations/make-reservation/make-reservation.component';
+import { ReservationBillingComponent } from './reservations/reservation-billing/reservation-billing.component';
 import { SearchRoomsComponent } from './reservations/search-rooms/search-rooms.component';
 import { AddRoomComponent } from './rooms-mgmt/add-room/add-room.component';
 import { RoomsMgmtModule } from './rooms-mgmt/rooms-mgmt.module';
@@ -21,6 +23,8 @@ const routes: Routes = [
   {path:'rooms/add',component:AddRoomComponent},
   {path:'rooms/:id',component:UpdateRoomComponent},
   {path:'search-rooms',component:SearchRoomsComponent},
+  {path:'search-rooms/:id/:checkin/:checkout',component:MakeReservationComponent},
+  {path:'all-reservations',component:ReservationBillingComponent},
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
 
 
@@ -34,6 +38,7 @@ export class AppRoutingModule { }
 
 export const routingComponents =[
   DashboardComponent,StaffListComponent,AddStaffComponent,UpdateStaffComponent,
-  SearchRoomsComponent
-
+  SearchRoomsComponent,
+  MakeReservationComponent,
+  ReservationBillingComponent
 ]
