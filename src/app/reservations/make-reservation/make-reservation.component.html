@@ -1,10 +1,9 @@
-<p>make-reservation works!</p>
-<div>
-    <div id="errordiv">
+<!-- <p>make-reservation works!</p> -->
+<div  *ngIf="isLoggedIn; else loggedOut">
+  <div id="errordiv">
         {{errorMsg}}
     </div>
     <div>
-        {{addReservationForm.value|json}}
         <form [formGroup]="addReservationForm" (ngSubmit)="onSubmit()">
             <div id="content">
                 <div>
@@ -126,3 +125,7 @@
             </div>
     </div>
 </div>
+
+<ng-template #loggedOut>
+  NOT ALLOWED
+</ng-template>

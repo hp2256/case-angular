@@ -9,8 +9,8 @@ import { Guest } from '../models/guest';
   providedIn: 'root'
 })
 export class GuestsServiceService {
- // private _url:string="http://localhost:8100/case-guests/";
-private _url:string="http://localhost:8081/"
+  private _url:string="http://localhost:8100/case-guests/";
+//private _url:string="http://localhost:8081/"
  //@CrossOrigin(origins = "*", allowedHeaders = "*")
 
 

@@ -14,8 +14,8 @@ import { Reservation } from './reservation';
 })
 export class ReservationServicesService {
 
-  //private _url:string="http://localhost:8100/case-reservation/";
-  private _url:string="http://localhost:8086/";
+  private _url:string="http://localhost:8100/case-reservation/";
+ // private _url:string="http://localhost:8086/";
 
   constructor(private httpClient:HttpClient) { }
 

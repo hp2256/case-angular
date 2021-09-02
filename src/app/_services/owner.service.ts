@@ -12,8 +12,8 @@ import { Department } from '../models/department';
   providedIn: 'root'
 })
 export class OwnerService {
- // private _url:string="http://localhost:8100/case-guests/";
- private _url:string="http://localhost:8084/"
+  private _url:string="http://localhost:8100/case-owner/api/";
+// private _url:string="http://localhost:8084/"
   constructor(private _httpClient:HttpClient) { }
 
   getReports():Observable<AllReports>{

@@ -34,7 +34,7 @@ export class UpdateDepartmentComponent implements OnInit {
       
       const user = this.token.getUser();
       this.roles = user.roles;
-      if(this.roles.includes('ROLE_OWNER')||this.roles.includes('ROLE_MANAGER')){
+      if(this.roles.includes('ROLE_OWNER')){
         this.route.paramMap.subscribe((params:ParamMap)=>{
           let id=params.get('id')||"";
           this.departmentId=id;

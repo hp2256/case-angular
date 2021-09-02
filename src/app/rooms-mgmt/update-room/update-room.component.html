@@ -1,9 +1,8 @@
-<div>
+<div class="container" *ngIf="allowed; else loggedOut">
     <div [hidden]="!errorBool">
         ERROR: {{errorMsg}}
     </div>
 <form [formGroup]="updateRoomForm" (ngSubmit)="onSubmit()">
-    {{updateRoomForm.value|json}}
 <div id="content">
     <div>
          <mat-form-field appearance="outline">
@@ -61,3 +60,7 @@
 <button mat-raised-button (click)="onCancel()" type="button">Cancel</button>
 </form>
 </div>
+
+<ng-template #loggedOut>
+    NOT ALLOWED
+  </ng-template>

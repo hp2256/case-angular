@@ -41,7 +41,9 @@ export class AppComponent {
 
   logout(): void {
     this.tokenStorageService.signOut();
-    this.router.navigate(['login']);
+    this.router.navigate(['/'])
+
+   // this.router.navigate(['login']);
     window.location.reload();
     
   }

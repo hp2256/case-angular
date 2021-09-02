@@ -3,6 +3,7 @@ import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Staff } from '../staff';
 import { StaffserviceService } from '../staffservice.service';
+import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-update-staff',
@@ -16,15 +17,26 @@ export class UpdateStaffComponent implements OnInit {
     private _staffService:StaffserviceService, 
     private route:ActivatedRoute, 
     private router:Router,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private token:TokenStorageService
     ) {
    }
 
   public memberId:string="";
   public staffUpdate!:Staff;
   public errorMsg:string="";
+  isLoggedIn=false;
+  allowed=false;
+  private roles: string[] = [];
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.token.getToken();
+    if(this.isLoggedIn){
+      const user = this.token.getUser();
+      this.roles = user.roles;
+    
+      if(this.roles.includes('ROLE_OWNER')||this.roles.includes('ROLE_MANAGER')){
+        this.allowed=true;
     this.route.paramMap.subscribe((params:ParamMap)=>{
       let id=params.get('id')||"";
       this.memberId=id;
@@ -54,6 +66,8 @@ export class UpdateStaffComponent implements OnInit {
         this.staffUpdate=data},
       error=>this.errorMsg=error
     )
+        }}
+    //oninit
   }
 
   onSubmit(){

@@ -11,8 +11,8 @@ import { StaffList } from './staff-list';
 })
 export class StaffserviceService {
 
-  private _url:string="http://localhost:8082/";
-
+ // private _url:string="http://localhost:8082/";
+  private _url:string="http://localhost:8100/case-staff/";
 
   constructor(private _httpClient:HttpClient) { }
 

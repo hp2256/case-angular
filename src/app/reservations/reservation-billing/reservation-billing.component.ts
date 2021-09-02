@@ -50,14 +50,15 @@ export class ReservationBillingComponent implements OnInit {
     }
 
   }
-  bill!:Bill;
+ // bill!:Bill;
   payBill(reservation:Reservation){
     this._reservationService.issueBill(reservation)
     .subscribe(
       data=>{
-        this.bill=data;
-        this.router.navigate([this.bill.id],{relativeTo:this.route});
+        let bill=data;
+        console.log(bill);
         
+        this.router.navigate([bill.id],{relativeTo:this.route});
       },
       error=>{}
     )

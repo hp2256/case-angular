@@ -1,9 +1,8 @@
-<p>search-rooms works!</p>
-<div>
-    <div>
+<div  *ngIf="isLoggedIn; else loggedOut">
+  <div>
         <h2>Search for a Rooms within selected dates</h2>
     </div>
-    {{range.value|json}}
+    <!-- {{range.value|json}} -->
     <div id="datepicker">
         <mat-form-field appearance="fill">
             <mat-label>Enter a date range</mat-label>
@@ -80,3 +79,7 @@
           
     </div>
 </div>
+
+<ng-template #loggedOut>
+  NOT ALLOWED
+</ng-template>

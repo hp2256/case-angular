@@ -29,31 +29,40 @@ export class PaymentComponent implements OnInit {
   private roles: string[] = [];
   errorBool=false;
   errorMsg="";
-  billId="";
+  billIdString!:string;
+
+  dataLoaded=false;
   ngOnInit(): void {
     this.isLoggedIn = !!this.token.getToken();
     if(this.isLoggedIn){ 
       this.route.paramMap.subscribe((params:ParamMap)=>{
         let id=params.get('id')||"";
-        this.billId=id;
+        this.billIdString=id;
         console.log(id);
-        
-      })
-      this.reservationService.getBill(this.billId)
+      });
+      this.reservationService.getBill(this.billIdString)
       .subscribe(
         data=>{  
-        let total = data.price+data.taxes;
+          this.dataLoaded=true;
+        let totalbill = data.price+data.taxes;
         let time:Date=new Date();
+        let id= data.id;
            this.addPaymentForm= this.fb.group(
           { 
             //id:[],
-            cardNumber:['',[Validators.required]],
-            total:[total,[Validators.required,Validators.minLength(16)]],
-            billId:[data.id],
+            total:[totalbill,[Validators.required]],
+
+            cardNumber:['',[Validators.required,Validators.minLength(16)]],
+            billId:[id],
             payTime:[time]
           }
-        );},
-        error=>{}
+        );
+      },
+        error=>{
+          console.log(error);
+          
+          this.errorMessage=error;
+        }
       );
    
     }
@@ -61,8 +70,12 @@ export class PaymentComponent implements OnInit {
   get cardNumber(){
     return this.addPaymentForm.get('cardNumber')!;
   }
-  get total(){
+  get billtotal(){
     return this.addPaymentForm.get('total')!;
+  }
+  get billId(){
+    return this.addPaymentForm.get('billId')!;
+
   }
   onSubmit(){
     console.log(this.addPaymentForm.value);

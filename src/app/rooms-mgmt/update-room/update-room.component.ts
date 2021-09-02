@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { Rooms } from '../rooms';
 import { RoomsServiceService } from '../rooms-service.service';
 
@@ -16,7 +17,8 @@ export class UpdateRoomComponent implements OnInit {
     private fb:FormBuilder, 
     private _roomService:RoomsServiceService,
     private router:Router, 
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private token:TokenStorageService
   ) { }
 
   
@@ -24,10 +26,21 @@ export class UpdateRoomComponent implements OnInit {
   updatedRoom!:Rooms;
   errorMsg="";
   errorBool=false;
+  isLoggedIn=false;
+  allowed=false;
+  private roles: string[] = [];
 
   public roomId:string="";
 
   ngOnInit(): void {
+    
+    this.isLoggedIn = !!this.token.getToken();
+    if(this.isLoggedIn){ 
+      
+      const user = this.token.getUser();
+      this.roles = user.roles;
+      if(this.roles.includes('ROLE_OWNER')||this.roles.includes('ROLE_MANAGER')){
+        this.allowed=true;
     this.route.paramMap.subscribe((params:ParamMap)=>{
       let id=params.get('id')||"";
       this.roomId=id;
@@ -48,7 +61,8 @@ export class UpdateRoomComponent implements OnInit {
       },
       error=>this.errorMsg=error
     )
-   
+      }}
+   //oninit
   }
   get roomNumber(){
     return this.updateRoomForm.get('roomNumber')!;

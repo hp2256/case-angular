@@ -32,7 +32,7 @@ export class ReportsComponent implements OnInit {
       const user = this.token.getUser();
       this.roles = user.roles;
     
-      if(this.roles.includes('ROLE_OWNER')||this.roles.includes('ROLE_MANAGER')){
+      if(this.roles.includes('ROLE_OWNER')){
         this.allowed=true;
        this.ownerService.getReports().subscribe
        (

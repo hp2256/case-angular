@@ -37,7 +37,7 @@ export class AddDepartmentComponent implements OnInit {
       
       const user = this.token.getUser();
       this.roles = user.roles;
-      if(this.roles.includes('ROLE_OWNER')||this.roles.includes('ROLE_MANAGER')){
+      if(this.roles.includes('ROLE_OWNER')){
         this.allowed=true;
         this.addDepartmentForm= this.fb.group(
           { 

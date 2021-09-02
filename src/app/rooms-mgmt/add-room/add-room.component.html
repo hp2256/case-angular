@@ -1,10 +1,8 @@
-<p>add-room works!</p>
-<div>
+<div class="container" *ngIf="allowed; else loggedOut">
     <div [hidden]="!errorBool">
         ERROR: {{errorMsg}}
     </div>
 <form [formGroup]="addRoomForm" (ngSubmit)="onSubmit()">
-    {{addRoomForm.value|json}}
 <div id="content">
     <div>
          <mat-form-field appearance="outline">
@@ -62,3 +60,7 @@
 <button mat-raised-button (click)="onCancel()" type="button">Cancel</button>
 </form>
 </div>
+
+<ng-template #loggedOut>
+    NOT ALLOWED
+  </ng-template>
