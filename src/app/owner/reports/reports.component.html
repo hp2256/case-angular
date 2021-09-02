@@ -1,0 +1,65 @@
+<p>reports works!</p>
+<div  *ngIf="allowed; else loggedOut">
+    <div>
+        <mat-toolbar>
+            <a  mat-raised-button  (click)="viewReport()" >Generate Reports</a>
+            <!-- <a mat-raised-button >Add</a> -->
+        </mat-toolbar>
+    </div>
+    <div class="all-reports">
+        <!-- {{staff|json}} -->
+        <br>
+        <mat-form-field appearance="standard">
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Date" #input>
+        </mat-form-field>
+        <table style="width: 100%;" mat-table [dataSource]="reportsDataSource" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> Id </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="reportDate">
+              <th mat-header-cell *matHeaderCellDef>reportDate</th>
+              <td mat-cell *matCellDef="let element"> {{element.reportDate}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="numberOfStaff">
+              <th mat-header-cell *matHeaderCellDef>numberOfStaff </th>
+              <td mat-cell *matCellDef="let element"> {{element.numberOfStaff}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="staffPayment">
+                <th mat-header-cell *matHeaderCellDef>staffPayment </th>
+                <td mat-cell *matCellDef="let element"> {{element.staffPayment}} </td>
+              </ng-container>
+              <ng-container matColumnDef="totalIncome">
+                <th mat-header-cell *matHeaderCellDef>totalIncome</th>
+                <td mat-cell *matCellDef="let element"> {{element.totalIncome}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="deleteReport">
+                <th mat-header-cell *matHeaderCellDef> Delete </th>
+                <td mat-cell *matCellDef="let element"> 
+                  <button mat-raised-button color="primary" (click)="deleteReport(element)">Delete</button>
+                 </td>
+              </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+          </table>
+          
+          
+    </div>
+</div>
+<ng-template #loggedOut>
+    NOT ALLOWED
+  </ng-template>

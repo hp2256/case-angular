@@ -15,6 +15,8 @@ import { ReservationServicesService } from '../reservation-services.service';
 export class SearchRoomsComponent implements OnInit {
   range!:FormGroup;
   displayedColumns: string[] = ['roomNumber','type','typeId','smoke','price','reserveRoom'];
+
+  //material table
   roomsDataSource = new MatTableDataSource();
 
   constructor(
@@ -34,11 +36,14 @@ export class SearchRoomsComponent implements OnInit {
     }
     );
     }
+
     checkIn!: string;
     checkOut!: string;
+
   search(){
     this.checkIn=formatDate(this.range.get('start')?.value,'yyyy-MM-dd','en');
     this.checkOut=formatDate(this.range.get('end')?.value,'yyyy-MM-dd','en');
+
     this.reservationService.searchRooms(this.checkIn,this.checkOut)
     .subscribe(
       data=>{
@@ -50,7 +55,7 @@ export class SearchRoomsComponent implements OnInit {
         console.log(error);
         
       }
-    )
+    );
     console.log(this.checkIn);
     console.log(   this.checkOut  );
 
@@ -64,6 +69,9 @@ export class SearchRoomsComponent implements OnInit {
     console.log(rooms);
     console.log(this.checkIn);
     console.log(this.checkOut);
+
+
+    
     this.router.navigate([rooms.id,this.checkIn,this.checkOut],{relativeTo:this.route});
     //dont need to add price and number of nights
   }

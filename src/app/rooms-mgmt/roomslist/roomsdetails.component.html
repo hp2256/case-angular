@@ -3,6 +3,9 @@
   width: 100%;
 }
 </style>
+<div class="container" *ngIf="allowed; else loggedOut">
+
+
 <mat-toolbar>
     <a (click)="addRoom()" mat-raised-button routerLink="/add" routerLinkActive="active">Add</a>
 
@@ -66,3 +69,8 @@
           
     </div>
 </div>
+</div>
+
+<ng-template #loggedOut>
+  NOT ALLOWED
+</ng-template>

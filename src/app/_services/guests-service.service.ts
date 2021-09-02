@@ -37,12 +37,12 @@ private _url:string="http://localhost:8081/"
       return throwError(error);
     }));
   }
-  updateGuest(staff:Guest){
-    return this._httpClient.put<Guest>(this._url+"updateguest",staff);
+  updateGuest(guest:Guest){
+    return this._httpClient.put<Guest>(this._url+"updateguest",guest);
   };
 
-  addGuest(staff:Guest){
-    return this._httpClient.post<Guest>(this._url+"addguest",staff);
+  addGuest(guest:Guest){
+    return this._httpClient.post<Guest>(this._url+"addguest",guest);
   }
 
 }

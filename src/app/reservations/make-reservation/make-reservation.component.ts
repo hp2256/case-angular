@@ -118,7 +118,7 @@ export class MakeReservationComponent implements OnInit {
   .subscribe(
     response=>{
       console.log(response);
-    this.router.navigate(['../../../'],{relativeTo:this.route});
+      this.router.navigate(['../../../'],{relativeTo:this.route});
       alert('RESERVATION SUCCESS');
     },
     error=>{

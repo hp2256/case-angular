@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Bill } from 'src/app/models/bill';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { Reservation } from '../reservation';
 import { ReservationServicesService } from '../reservation-services.service';
@@ -49,12 +50,23 @@ export class ReservationBillingComponent implements OnInit {
     }
 
   }
+  bill!:Bill;
   payBill(reservation:Reservation){
-
+    this._reservationService.issueBill(reservation)
+    .subscribe(
+      data=>{
+        this.bill=data;
+        this.router.navigate([this.bill.id],{relativeTo:this.route});
+        
+      },
+      error=>{}
+    )
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.reservationsDataSource.filter = filterValue.trim().toLowerCase();
   }
-
+update(reservation:Reservation){
+  
+}
 }

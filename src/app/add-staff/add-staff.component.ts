@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Staff } from '../staff';
 import { StaffserviceService } from '../staffservice.service';
+import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-add-staff',
@@ -16,14 +17,19 @@ export class AddStaffComponent implements OnInit {
     private fb:FormBuilder, 
     private _staffService:StaffserviceService,
     private router:Router, 
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private token:TokenStorageService,
+
     ) { }
 
   addStaffForm!: FormGroup;
   addStaff!:Staff;
   errorMsg:string="";
   errorBool=false;
+  isLoggedIn=false;
   ngOnInit(): void {
+    this.isLoggedIn=!!this.token.getToken();
+    if(this.isLoggedIn){
     this.addStaffForm= this.fb.group(
       {
         //id:[],
@@ -41,6 +47,12 @@ export class AddStaffComponent implements OnInit {
         })
       }
     )
+    }
+    else{
+      
+      this.isLoggedIn=false;
+      this.errorMsg="PLEASE LOGIN";
+    }
   }
   get empName(){
     return this.addStaffForm.get('empName')!;

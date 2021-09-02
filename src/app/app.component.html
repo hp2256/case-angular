@@ -13,22 +13,27 @@
 <div>
 <mat-toolbar color="primary" class="navbar">
   <span>HMS</span><br>
+  <div *ngIf="isLoggedIn && showAdminBoard">
+
+    <a  mat-raised-button routerLink="/reports" routerLinkActive="active">Reports</a>
+    <a  mat-raised-button routerLink="/departments" routerLinkActive="active">Departments</a>
+  </div>
   <div *ngIf="isLoggedIn && showAdminBoard||showManagerBoard">
     <!-- change depending on role  -->
   <a  mat-raised-button routerLink="/staff" routerLinkActive="active">Staff</a>
   <a  mat-raised-button routerLink="/rooms" routerLinkActive="active">Rooms</a>
-  <a  mat-raised-button routerLink="/ics" routerLinkActive="active">ICS</a>
+  <a  mat-raised-button routerLink="/inventory" routerLinkActive="active">ICS</a>
 </div>
-<div>
+<div *ngIf="isLoggedIn">
+  <a  mat-raised-button routerLink="/guests" routerLinkActive="active">Guests</a>
   <a  mat-raised-button routerLink="/search-rooms" routerLinkActive="active">Search Rooms</a>
-
   <a  mat-raised-button routerLink="/all-reservations" routerLinkActive="active">All Reservations</a>
+  <a  mat-raised-button (click)="logout()">Logout</a>
 </div>
 <div *ngIf="!isLoggedIn">
   <a  mat-raised-button routerLink="/login" routerLinkActive="active">Log In</a>
 </div>
 <div *ngIf="isLoggedIn">
-  <a  mat-raised-button (click)="logout()">Logout</a>
 </div>
 </mat-toolbar>
 

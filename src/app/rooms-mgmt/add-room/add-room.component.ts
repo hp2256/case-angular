@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { Rooms } from '../rooms';
 import { RoomsServiceService } from '../rooms-service.service';
 
@@ -16,7 +17,8 @@ export class AddRoomComponent implements OnInit {
     private fb:FormBuilder, 
     private _roomService:RoomsServiceService,
     private router:Router, 
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private token:TokenStorageService
   ) { }
 
   
@@ -24,17 +26,32 @@ export class AddRoomComponent implements OnInit {
   addRoom!:Rooms;
   errorMsg="";
   errorBool=false;
+  isLoggedIn=false;
+  allowed=false;
+  private roles: string[] = [];
+
+
   ngOnInit(): void {
-    this.addRoomForm= this.fb.group(
-      { 
-        //id:[],
-        roomNumber:['',[Validators.required]],
-        type:['',[Validators.required]],
-        typeId:['',[Validators.required]],
-        smoke:['',[Validators.required]],
-        price:['',[Validators.required]],
+    this.isLoggedIn = !!this.token.getToken();
+    if(this.isLoggedIn){ 
+      
+      const user = this.token.getUser();
+      this.roles = user.roles;
+      if(this.roles.includes('ROLE_OWNER')||this.roles.includes('ROLE_MANAGER')){
+        this.allowed=true;
+        this.addRoomForm= this.fb.group(
+          { 
+            //id:[],
+            roomNumber:['',[Validators.required]],
+            type:['',[Validators.required]],
+            typeId:['',[Validators.required]],
+            smoke:['',[Validators.required]],
+            price:['',[Validators.required]],
+          }
+        );
       }
-    )
+    }
+   
   }
 //getters
 get roomNumber(){

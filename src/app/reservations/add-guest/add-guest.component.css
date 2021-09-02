@@ -1,0 +1,14 @@
+#content{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+#content div:not(#addresscontent){
+    padding: 15px;
+}
+#addresscontent{
+    padding: 0;
+    display: flex;
+ }
+ #addresscontent div{
+     padding-inline-end: 15px;
+ }

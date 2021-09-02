@@ -2,6 +2,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AllBills } from '../models/allbills';
+import { Bill } from '../models/bill';
+import { Payment } from '../models/payment';
 import { AllRooms } from '../rooms-mgmt/all-rooms';
 import { AllReservation } from './all-reservations';
 import { Reservation } from './reservation';
@@ -26,7 +29,12 @@ export class ReservationServicesService {
   }
 
   makeReservation(reservation:Reservation){
-    return this.httpClient.post<Reservation>(this._url+"addreservation",reservation);
+    return this.httpClient.post<Reservation>(this._url+"addreservation",reservation)
+    .pipe(catchError((error:HttpErrorResponse)=>{
+      console.log(error);
+      
+      return throwError(error);
+    }));
 
   }
   allReservations():Observable<AllReservation>{
@@ -38,4 +46,39 @@ export class ReservationServicesService {
     }));
   }
 
+  issueBill(reservation:Reservation):Observable<Bill>{
+    return this.httpClient.post<Bill>(this._url+"issuebill",reservation)
+    .pipe(catchError((error:HttpErrorResponse)=>{
+      console.log(error);
+      
+      return throwError(error);
+    }));
+  }
+  
+  getBill(id:string):Observable<Bill>{
+    return this.httpClient.get<Bill>(this._url+"getbill/"+id)
+    .pipe(catchError((error:HttpErrorResponse)=>{
+      console.log(error);
+      
+      return throwError(error);
+    }));
+  }
+  
+  getBills():Observable<AllBills>{
+    return this.httpClient.get<AllBills>(this._url+"getbills")
+    .pipe(catchError((error:HttpErrorResponse)=>{
+      console.log(error);
+      
+      return throwError(error);
+    }));
+  }
+
+  addPayment(payment:Payment):Observable<Payment>{
+    return this.httpClient.post<Payment>(this._url+"addpayment",payment)
+    .pipe(catchError((error:HttpErrorResponse)=>{
+      console.log(error);
+      
+      return throwError(error);
+    }));
+  }
 }

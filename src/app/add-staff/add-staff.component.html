@@ -1,6 +1,6 @@
 Add staff
 {{addStaffForm.value | json}}
-<div id="main">
+<div id="main"  *ngIf="isLoggedIn; else loggedOut">
     <div [hidden]="!errorBool">
         ERROR: {{errorMsg}}
     </div>
@@ -116,3 +116,6 @@ Add staff
 <button mat-raised-button (click)="onCancel()" type="button">Cancel</button>
 </form>
 </div>
+<ng-template #loggedOut>
+    NOT ALLOWED
+  </ng-template>
