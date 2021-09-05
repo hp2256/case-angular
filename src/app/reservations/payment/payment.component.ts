@@ -84,7 +84,7 @@ export class PaymentComponent implements OnInit {
       response=>{
         console.log("response "+response)
         
-        alert('SUCCESSFULLY ADDED');
+        alert('Payment Success!');
         this.router.navigate(['../'],{relativeTo:this.route});
  
       },

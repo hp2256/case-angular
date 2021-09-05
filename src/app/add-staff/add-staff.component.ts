@@ -41,7 +41,7 @@ export class AddStaffComponent implements OnInit {
         empEmail:['',[Validators.required,Validators.email]],
         empAddress: this.fb.group({
           street: ['',[Validators.required]],
-          zipCode: ['',[Validators.required]],
+          zipCode: ['',[Validators.required,Validators.minLength(4),Validators.maxLength(9)]],
           city: ['',[Validators.required]],
           country:['',[Validators.required]]
         })
@@ -98,7 +98,8 @@ export class AddStaffComponent implements OnInit {
     console.log(this.addStaffForm.value);
     this.addStaff=this.addStaffForm.value;
     this._staffService.addStaff(this.addStaff).subscribe(
-      response=>console.log(response),
+      response=>{console.log(response);
+      alert('Successfully Added guest');},
       error=>{
         this.errorBool=true;
         console.log(error);

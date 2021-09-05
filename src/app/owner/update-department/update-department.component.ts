@@ -73,7 +73,7 @@ export class UpdateDepartmentComponent implements OnInit {
       response=>{
         console.log("resposen "+response)
         
-        alert('SUCCESSFULLY ADDED');
+        alert('SUCCESSFULLY UPDATED');
         this.router.navigate(['../'],{relativeTo:this.route});
  
       },

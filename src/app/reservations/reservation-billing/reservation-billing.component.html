@@ -1,4 +1,3 @@
-<p>reservation-billing works!</p>
 <div class="container" *ngIf="isLoggedIn; else loggedOut">
 
     <div class="all-reservations">
@@ -46,10 +45,10 @@
               <ng-container matColumnDef="guests">
                 <th mat-header-cell *matHeaderCellDef> Guest </th>
                 <td  mat-cell *matCellDef="let e"> 
-                          <!-- <span *ngIf="(e.name!=null); else dataAvl">Name: {{e.guests.name}}</span> 
-                          <ng-template #dataAvl>
-                            <span>N/A</span>
-                          </ng-template> -->
+                          <div *ngIf="(e.guests!=null); else dataAvl">
+                            <span *ngFor="let gues of e.guests">{{gues.name}}</span>
+                          </div> 
+                          <ng-template #dataAvl></ng-template>
                   </td>
               </ng-container>
 

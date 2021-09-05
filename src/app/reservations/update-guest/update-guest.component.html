@@ -1,4 +1,3 @@
-<p>update-guest works!</p>
 <div  *ngIf="isLoggedIn; else loggedOut">
 
     <div [hidden]="!errorBool">
@@ -31,8 +30,10 @@
                  <mat-form-field appearance="outline">
         
                 <mat-label >Phone Number</mat-label>
-                <input matInput type="number" formControlName="phoneNumber">
+                <input matInput type="tel" formControlName="phoneNumber">
                 <mat-error *ngIf="phoneNumber.errors?.required">Required!</mat-error>
+                <mat-error *ngIf="phoneNumber.errors?.minlength">Please enter 10 digits!</mat-error>
+                <mat-error *ngIf="phoneNumber.errors?.maxlength">Please enter 10 digits!</mat-error>
         
             </mat-form-field>
         

@@ -47,17 +47,17 @@ export class UpdateStaffComponent implements OnInit {
         this.updateStaffForm= this.fb.group(
           {
             id:[data.id],
-            empName:[data.empName],
-            staffCode:[data.staffCode],
-            empSalary:[data.empSalary],
-            empAge:[data.empAge],
-            empOccupation:[data.empOccupation],
-            empEmail:[data.empEmail],
+            empName:[data.empName,[Validators.required]],
+            staffCode:[data.staffCode,[Validators.required]],
+            empSalary:[data.empSalary,[Validators.required]],
+            empAge:[data.empAge,[Validators.required]],
+            empOccupation:[data.empOccupation,[Validators.required]],
+            empEmail:[data.empEmail,[Validators.required,Validators.email]],
             empAddress: this.fb.group({
-              street: [data.empAddress.street],
-              zipCode: [data.empAddress.zipCode],
-              city: [data.empAddress.city],
-              country:[data.empAddress.country]
+              street: [data.empAddress.street,[Validators.required]],
+              zipCode: [data.empAddress.zipCode,[Validators.required,Validators.minLength(4),Validators.maxLength(9)]],
+              city: [data.empAddress.city,[Validators.required]],
+              country:[data.empAddress.country,[Validators.required]]
             }),
           }
         )
@@ -69,7 +69,42 @@ export class UpdateStaffComponent implements OnInit {
         }}
     //oninit
   }
+get empName(){
+  return this.updateStaffForm.get('empName')!;
+}
+get staffCode(){
+  return this.updateStaffForm.get('staffCode')!;
+}
+get empSalary(){
+  return this.updateStaffForm.get('empSalary')!;
+}
+get empAge(){
+  return this.updateStaffForm.get('empAge')!;
+}
+get empOccupation(){
+  return this.updateStaffForm.get('empOccupation')!;
+}
+get empEmail(){
+  return this.updateStaffForm.get('empEmail')!;
+}
+get empAddress(){
+  return this.updateStaffForm.get('empAddress')!;
+}
+get country() {
+  return this.updateStaffForm.get("empAddress")!.get('country')!;
+}
 
+get city() {
+  return this.updateStaffForm.get("empAddress")!.get('city')!;
+}
+
+get street() {
+  return this.updateStaffForm.get("empAddress")!.get('street')!;
+}
+
+get zipcode() {
+  return this.updateStaffForm.get("empAddress")!.get('zipCode')!;
+}
   onSubmit(){
     console.log(this.updateStaffForm.value);
     this.staffUpdate=this.updateStaffForm.value;

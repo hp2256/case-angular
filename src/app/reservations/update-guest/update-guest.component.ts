@@ -46,13 +46,13 @@ export class UpdateGuestComponent implements OnInit {
             id:[data.id],
             name:[data.name,[Validators.required]]!,
             memberCode:[data.memberCode,[Validators.required]]!,
-            phoneNumber:[data.phoneNumber,[Validators.required,Validators.minLength(10)]]!,
+            phoneNumber:[data.phoneNumber,[Validators.required,Validators.maxLength(10),Validators.minLength(10)]]!,
             gender:[data.gender,[Validators.required]]!,
             company:[data.company,[Validators.required]],
             email:[data.email,[Validators.required,Validators.email]],
             address: this.fb.group({
               street: [data.address.street,[Validators.required]],
-              zipCode: [data.address.zipCode,[Validators.required]],
+              zipCode: [data.address.zipCode,[Validators.required,Validators.minLength(4),Validators.maxLength(9)]],
               city: [data.address.city,[Validators.required]],
               country:[data.address.country,[Validators.required]]
             })

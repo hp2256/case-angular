@@ -51,8 +51,8 @@ export class MakeReservationComponent implements OnInit {
       })
 //dont need to add priceand number of nights
       this.addReservationForm=this.fb.group({
-        numberOfChildren:['',[Validators.required,Validators.min(0)]]!,
-        numberOfAdults:['',[Validators.required,Validators.min(1)]]!,
+        numberOfChildren:['',[Validators.required,Validators.min(0),Validators.max(2)]]!,
+        numberOfAdults:['',[Validators.required,Validators.min(1),Validators.max(2)]]!,
         checkInDate:[this.reservedCheckIn,[Validators.required]]!,
         checkOutDate:[this.reservedCheckOut,[Validators.required]]!,
         status:['']!,

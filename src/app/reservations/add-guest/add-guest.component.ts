@@ -38,13 +38,13 @@ export class AddGuestComponent implements OnInit {
           //id:[],
           name:['',[Validators.required]]!,
           memberCode:['',[Validators.required]]!,
-          phoneNumber:['',[Validators.required,Validators.minLength(10)]]!,
+          phoneNumber:['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]]!,
           gender:['',[Validators.required]]!,
           company:['',[Validators.required]],
           email:['',[Validators.required,Validators.email]],
           address: this.fb.group({
             street: ['',[Validators.required]],
-            zipCode: ['',[Validators.required]],
+            zipCode: ['',[Validators.required,Validators.minLength(4),Validators.maxLength(9)]],
             city: ['',[Validators.required]],
             country:['',[Validators.required]]
           })
@@ -95,6 +95,18 @@ export class AddGuestComponent implements OnInit {
   }
 onSubmit(){
   console.log(this.addGuestForm.value);
+  let guest = this.addGuestForm.value;
+  this._guestService.addGuest(guest).subscribe
+  (
+    data=>{
+      console.log(data);
+      this.router.navigate(['../'],{relativeTo:this.route});
+      alert('Guest added');
+    },
+    error=>{
+      this.errorMsg=error.value;
+    }
+  )
 
 }
 onCancel(){

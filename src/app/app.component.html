@@ -28,7 +28,7 @@
   <a  mat-raised-button routerLink="/guests" routerLinkActive="active">Guests</a>
   <a  mat-raised-button routerLink="/search-rooms" routerLinkActive="active">Search Rooms</a>
   <a  mat-raised-button routerLink="/all-reservations" routerLinkActive="active">All Reservations</a>
-  <a  mat-raised-button (click)="logout()">Logout</a>
+  <a  mat-raised-button routerLink="/login" (click)="logout()">Logout</a>
 </div>
 <div *ngIf="!isLoggedIn">
   <a  mat-raised-button routerLink="/login" routerLinkActive="active">Log In</a>
