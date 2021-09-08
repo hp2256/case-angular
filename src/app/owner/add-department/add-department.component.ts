@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Department } from 'src/app/models/department';
 import { OwnerService } from 'src/app/_services/owner.service';
@@ -18,7 +19,7 @@ export class AddDepartmentComponent implements OnInit {
     private route:ActivatedRoute,
     private token:TokenStorageService,
     private fb:FormBuilder, 
-
+    private snackBar:MatSnackBar
   ) { }
 
   addDepartmentForm!:FormGroup;
@@ -62,8 +63,9 @@ export class AddDepartmentComponent implements OnInit {
     this.ownerService.addDepartment(this.department).subscribe(
       response=>{
         console.log("resposen "+response)
+    this.snackBar.open("Successfully Added!","Dismiss",{duration:2000});
         
-        alert('SUCCESSFULLY ADDED');
+       // alert('SUCCESSFULLY ADDED');
         this.router.navigate(['../'],{relativeTo:this.route});
  
       },

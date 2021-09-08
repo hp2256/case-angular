@@ -6,6 +6,8 @@ import { ReportsComponent } from './reports/reports.component';
 import { DepartmentListComponent } from './department-list/department-list.component';
 import { AddDepartmentComponent } from './add-department/add-department.component';
 import { UpdateDepartmentComponent } from './update-department/update-department.component';
+import { DialogCompComponent } from './dialog-comp/dialog-comp.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -14,13 +16,15 @@ import { UpdateDepartmentComponent } from './update-department/update-department
     ReportsComponent,
     DepartmentListComponent,
     AddDepartmentComponent,
-    UpdateDepartmentComponent
+    UpdateDepartmentComponent,
+    DialogCompComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ]
 })
 export class OwnerModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Inventory } from 'src/app/models/inventory';
 import { RoomsServiceService } from 'src/app/rooms-mgmt/rooms-service.service';
@@ -18,6 +19,8 @@ export class UpdateInventoryComponent implements OnInit {
     private route:ActivatedRoute,
     private token:TokenStorageService,
     private fb:FormBuilder, 
+    private snackBar:MatSnackBar
+
   ) { }
   addInventoryForm!:FormGroup;
 
@@ -72,8 +75,9 @@ export class UpdateInventoryComponent implements OnInit {
     this.roomsService.updateInventory(this.inventory).subscribe(
       response=>{
         console.log("resposen "+response)
+      this.snackBar.open("Successfully Updated","Dismiss",{duration:2000});
         
-        alert('SUCCESSFULLY UPDATED');
+     //   alert('SUCCESSFULLY UPDATED');
         this.router.navigate(['../'],{relativeTo:this.route});
  
       },

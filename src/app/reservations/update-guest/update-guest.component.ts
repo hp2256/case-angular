@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Guest } from 'src/app/models/guest';
 import { GuestsServiceService } from 'src/app/_services/guests-service.service';
@@ -18,6 +19,7 @@ export class UpdateGuestComponent implements OnInit {
     private router:Router, 
     private route:ActivatedRoute,
     private token:TokenStorageService,
+    private snackBar:MatSnackBar
   ) { }
   addGuestForm!: FormGroup;
   addStaff!:Guest;
@@ -115,11 +117,15 @@ onSubmit(){
   this.guestUpdate=this.addGuestForm.value;
   this._guestService.updateGuest(this.guestUpdate)
   .subscribe(
-    response=>console.log(response),
+    response=>{console.log(response);
+    this.router.navigate(['../'],{relativeTo:this.route});
+    this.snackBar.open("Successfully Updated!","Dismiss",{duration:2000});
+    
+    
+    },
     error=>console.log(error)    
   )
   ;
-  this.router.navigate(['../'],{relativeTo:this.route})
 }
 onCancel(){
   this.router.navigate(['../'],{relativeTo:this.route});

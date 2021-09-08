@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Department } from 'src/app/models/department';
 import { OwnerService } from 'src/app/_services/owner.service';
@@ -18,6 +19,7 @@ export class UpdateDepartmentComponent implements OnInit {
     private route:ActivatedRoute,
     private token:TokenStorageService,
     private fb:FormBuilder, 
+    private snackBar:MatSnackBar
   ) { }
   department!:Department;
   public errorMessage:string="";
@@ -72,8 +74,9 @@ export class UpdateDepartmentComponent implements OnInit {
     this.ownerService.updateDepartment(this.department).subscribe(
       response=>{
         console.log("resposen "+response)
+        this.snackBar.open("Successfully Updated!","Dismiss",{duration:2000});
         
-        alert('SUCCESSFULLY UPDATED');
+     //   alert('SUCCESSFULLY UPDATED');
         this.router.navigate(['../'],{relativeTo:this.route});
  
       },

@@ -14,14 +14,17 @@ module.exports = function (config) {
     ],
     client: {
       jasmine: {
+      hideDisabled:true
         // you can add configuration options for Jasmine here
         // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
         // for example, you can disable the random execution with `random: false`
         // or set a specific seed with `seed: 4321`
       },
+      hideDisabled:true,
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     jasmineHtmlReporter: {
+      hideDisabled:true,
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
@@ -39,6 +42,7 @@ module.exports = function (config) {
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false,
-    restartOnFileChange: true
+    restartOnFileChange: true,
+    hideDisabled:true
   });
 };

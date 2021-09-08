@@ -67,7 +67,8 @@ export class ReservationBillingComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.reservationsDataSource.filter = filterValue.trim().toLowerCase();
   }
-update(reservation:Reservation){
+viewBill(reservation:Reservation){
+  console.log(reservation.billId);
   
 }
 }

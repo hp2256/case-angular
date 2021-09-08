@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { Rooms } from '../rooms';
@@ -18,7 +19,8 @@ export class UpdateRoomComponent implements OnInit {
     private _roomService:RoomsServiceService,
     private router:Router, 
     private route:ActivatedRoute,
-    private token:TokenStorageService
+    private token:TokenStorageService,
+    private snackBar:MatSnackBar
   ) { }
 
   
@@ -84,7 +86,9 @@ export class UpdateRoomComponent implements OnInit {
     this.updatedRoom=this.updateRoomForm.value;
     this._roomService.updateRoom(this.updatedRoom).subscribe(
       response=>{console.log(response);
-      alert('SUCCESSFULLY UPDATED');
+    //  alert('SUCCESSFULLY UPDATED');
+    this.snackBar.open("Successfully Updated","Dismiss",{duration:2000});
+
     this.router.navigate(['../'],{relativeTo:this.route});
 
       },

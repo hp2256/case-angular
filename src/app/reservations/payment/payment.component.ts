@@ -1,6 +1,7 @@
 import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Payment } from 'src/app/models/payment';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
@@ -18,7 +19,8 @@ export class PaymentComponent implements OnInit {
     private route:ActivatedRoute,
     private token:TokenStorageService,
     private fb:FormBuilder, 
-    private reservationService:ReservationServicesService
+    private reservationService:ReservationServicesService,
+    private snackBar:MatSnackBar
   ) { }
   addPaymentForm!:FormGroup;
 
@@ -83,8 +85,9 @@ export class PaymentComponent implements OnInit {
     this.reservationService.addPayment(this.payment).subscribe(
       response=>{
         console.log("response "+response)
+        this.snackBar.open("Payment Success!","Dismiss",{duration:2000});
         
-        alert('Payment Success!');
+       // alert('Payment Success!');
         this.router.navigate(['../'],{relativeTo:this.route});
  
       },

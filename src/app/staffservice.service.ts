@@ -22,7 +22,7 @@ export class StaffserviceService {
     return this._httpClient.get<StaffList>(this._url+"allstaff")
     .pipe(catchError((error:HttpErrorResponse)=>{
       console.log(error);
-      return throwError(error);
+      return throwError(error.message);
     }));
   }
 
@@ -34,15 +34,23 @@ export class StaffserviceService {
     
     return this._httpClient.get<Staff>(this._url+"staff/"+id)
     .pipe(catchError((error:HttpErrorResponse)=>{
-      return throwError(error);
+      return throwError(error.message);
     }));
   }
   updateStaff(staff:Staff){
-    return this._httpClient.put<Staff>(this._url+"updatestaff",staff);
+    return this._httpClient.put<Staff>(this._url+"updatestaff",staff)
+    .pipe(catchError((error:HttpErrorResponse)=>{
+      return throwError(error.message);
+    }));
+    ;
   };
 
   addStaff(staff:Staff){
-    return this._httpClient.post<Staff>(this._url+"addstaff",staff);
+    return this._httpClient.post<Staff>(this._url+"addstaff",staff)
+    .pipe(catchError((error:HttpErrorResponse)=>{
+      return throwError(error.message);
+    }));
+    ;
   }
 
 }

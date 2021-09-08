@@ -1,6 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Staff } from '../staff';
 import { StaffserviceService } from '../staffservice.service';
@@ -19,6 +20,7 @@ export class AddStaffComponent implements OnInit {
     private router:Router, 
     private route:ActivatedRoute,
     private token:TokenStorageService,
+    private snackBar:MatSnackBar
 
     ) { }
 
@@ -99,13 +101,16 @@ export class AddStaffComponent implements OnInit {
     this.addStaff=this.addStaffForm.value;
     this._staffService.addStaff(this.addStaff).subscribe(
       response=>{console.log(response);
-      alert('Successfully Added guest');},
+    //  alert('Successfully Added guest');
+    this.snackBar.open("Successfully Added Guest","Dismiss",{duration:2000});
+    this.router.navigate(['../'],{relativeTo:this.route});
+
+    },
       error=>{
         this.errorBool=true;
         console.log(error);
         this.errorMsg=error;}     
     )
-    this.router.navigate(['../'],{relativeTo:this.route});
   }
   onCancel(){
     this.router.navigate(['../'],{relativeTo:this.route});

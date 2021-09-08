@@ -10,13 +10,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoomsMgmtModule } from './rooms-mgmt/rooms-mgmt.module';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { LoginComponent } from './login/login.component';
+import { DialogCompComponent } from './owner/dialog-comp/dialog-comp.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    LoginComponent
+    LoginComponent,
+    DialogCompComponent
   ],
+  entryComponents:[DialogCompComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

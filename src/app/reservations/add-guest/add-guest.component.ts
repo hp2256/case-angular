@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Guest } from 'src/app/models/guest';
 import { GuestsServiceService } from 'src/app/_services/guests-service.service';
@@ -18,7 +19,7 @@ export class AddGuestComponent implements OnInit {
     private router:Router, 
     private route:ActivatedRoute,
     private token:TokenStorageService,
-
+    private snackBar:MatSnackBar
   ) { }
 
   
@@ -101,7 +102,9 @@ onSubmit(){
     data=>{
       console.log(data);
       this.router.navigate(['../'],{relativeTo:this.route});
-      alert('Guest added');
+    //  alert('Guest added');
+    this.snackBar.open("Successfully Added","Dismiss",{duration:2000});
+
     },
     error=>{
       this.errorMsg=error.value;

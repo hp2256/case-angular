@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Report } from 'src/app/models/report';
 import { OwnerService } from 'src/app/_services/owner.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
+import { DialogCompComponent } from '../dialog-comp/dialog-comp.component';
 
 @Component({
   selector: 'app-reports',
@@ -16,7 +19,9 @@ export class ReportsComponent implements OnInit {
     private router:Router, 
     private route:ActivatedRoute,
     private token:TokenStorageService,
-    private ownerService:OwnerService
+    private ownerService:OwnerService,
+    private snackBar:MatSnackBar,
+    private matDialog:MatDialog
   ) { }
   isLoggedIn=false;
   allowed=false;
@@ -59,16 +64,27 @@ export class ReportsComponent implements OnInit {
       )
   }
   deleteReport(report:Report){
-    this.ownerService.deleteReport(report).subscribe
-    (
-      data=>{console.log(data);
-        alert('Deleted');
-        window.location.reload();
-      },
-      error=>{this.errorMsg=error;
-      console.log(error);
+    let dialogRef = this.matDialog.open(DialogCompComponent);
+    dialogRef.afterClosed().subscribe(
+      result=>{
+        if(result==="true"){
+          this.ownerService.deleteReport(report).subscribe
+          (
+            data=>{console.log(data);
+            //  alert('Deleted');
+          this.snackBar.open("Deleted","Dismiss",{duration:2000});
+              window.location.reload();
+            },
+            error=>{this.errorMsg=error;
+            console.log(error);
+            }
+          );
+          console.log(`Dialog: ${result}`);
+
+        }
       }
     )
+
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

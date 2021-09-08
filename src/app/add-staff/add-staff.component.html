@@ -62,8 +62,8 @@
 
         <mat-label >Email</mat-label>
         <input matInput type="email" formControlName="empEmail">
-        <mat-error *ngIf="empOccupation.errors?.required">Required!</mat-error>
-        <mat-error *ngIf="empOccupation.errors?.email">Not a valid email!</mat-error>
+        <mat-error *ngIf="empEmail.errors?.required">Required!</mat-error>
+        <mat-error *ngIf="empEmail.errors?.email">Not a valid email!</mat-error>
 
     </mat-form-field>
 

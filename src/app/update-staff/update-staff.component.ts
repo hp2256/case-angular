@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Staff } from '../staff';
 import { StaffserviceService } from '../staffservice.service';
@@ -18,7 +19,8 @@ export class UpdateStaffComponent implements OnInit {
     private route:ActivatedRoute, 
     private router:Router,
     private fb:FormBuilder,
-    private token:TokenStorageService
+    private token:TokenStorageService,
+    private snackBar:MatSnackBar
     ) {
    }
 
@@ -110,11 +112,14 @@ get zipcode() {
     this.staffUpdate=this.updateStaffForm.value;
     this._staffService.updateStaff(this.staffUpdate)
     .subscribe(
-      response=>console.log(response),
+      response=>{console.log(response);
+      this.snackBar.open("Successfully Updated","Dismiss",{duration:2000});
+    this.router.navigate(['../'],{relativeTo:this.route})
+      
+      },
       error=>console.log(error)    
     )
     ;
-    this.router.navigate(['../'],{relativeTo:this.route})
   }
   onCancel(){
     this.router.navigate(['../'],{relativeTo:this.route})

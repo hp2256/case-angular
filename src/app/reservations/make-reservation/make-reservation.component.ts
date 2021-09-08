@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AllGuest } from 'src/app/models/allguests';
@@ -23,7 +24,8 @@ export class MakeReservationComponent implements OnInit {
     private _reservationService:ReservationServicesService,
     private fb:FormBuilder,
     private token:TokenStorageService,
-    private _guestService:GuestsServiceService
+    private _guestService:GuestsServiceService,
+    private snackBar:MatSnackBar
   ) { }
   dataSource=new MatTableDataSource();
   displayedColumns:string[]=['memberCode','phoneNumber','company','name','email','gender','address','addG']
@@ -119,7 +121,9 @@ export class MakeReservationComponent implements OnInit {
     response=>{
       console.log(response);
       this.router.navigate(['../../../'],{relativeTo:this.route});
-      alert('RESERVATION SUCCESS');
+    //  alert('RESERVATION SUCCESS');
+    this.snackBar.open("Successfully Reserved","Dismiss",{duration:2000});
+
     },
     error=>{
       this.errorMsg=error;
